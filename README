@@ -1,8 +1,8 @@
-﻿OpenHUDisplay
+﻿OpenHUDisplay (as opposed to OpenHUD, which is a web portal)
 
 This project aims to provide software to build your very own Heads Up Display for automotive use.
 Initially, this project is limited to the PIC16F690 and Futaba M12BY02AA, the latter is supposedly being hard to get outside of EU.
-It can, however, make use of most cheap serially connected GPS modules based on the SiRF family chips.
+It can, however, make use of most cheap serially connected GPS modules based on the SiRF family chipset.
 
 To get started, you'll need B Knudsen's Cc5x compiler, the free edition will work just fine.
 Then comes the tricky part. If you're on a *nix system, it's pretty likely ./generate_hex.sh will suffice to get you on the right track.
@@ -12,6 +12,7 @@ If you're a windows user, please scroll down.
 *nix users:
 Verify you have a wrapper for Cc5x in ~/bin/cc5x (a bash script containing "wine /path/to/cc5x.exe $@" should suffice)
 Execute ./generate_hex.sh and follow instructions
+Use pk2cmd or similar to program your PIC, for me the line is "pk2cmd -P -Fproject_pic16f690.hex -M -T", replace the "-T" with "-W" if you use an external power source.
 
 Windows users:
 The first step is to retrieve the i2c library used by the display driver, it's available from SparkFun (remember to thank them) in their tutorial section.
