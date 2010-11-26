@@ -1,0 +1,30 @@
+Note:
+[Disclaimer] This software is still under development. While it will most likely work there's no guarantee it won't harm your hardware even if used properly. [/Disclaimer]
+
+This project is now named OpenHUDisplay (as opposed to OpenHUD, which is a web portal).
+If you have a feature suggestion or if you've found a bug, please send an email to pic@djhg2000.net
+
+After the project recives a proper name, it will be announced here, possibly together with a git repo.
+Update: Due to some possible licensing issues with the modified i2c library, I can't include it in the archives for the time being, but I'm working to resolve this as we speak.
+The rest of the source along with a minimal patch for the unmodified library is avalible at git://github.com/Djhg2000/OpenHUDisplay.git
+
+For now, you can access older versions by appennding _date after "hud" to the archive, e.g. hud_20101124.tar.gz for the initial release.
+
+Legend:
++ Added
+- Removed
+* Fix
+
+2010-11-26:
+* Fixed an issue where a previous bugfix could cause a leading zero while speeds are under 10 km/h under certain conditions
++ Support for a few upper-case letters underway for the M12BY02AA driver (not included in this release)
++ Smile, we are on the github :)
+
+2010-11-25:
+* Fixed a bug where speeds above 100 could be displayed incorrectly
++ Precompiled binary .hex file for PIC16F690 is now supplied in archive
++ Added bash script for generating new source archives (requires the tar command line utility)
+
+2010-11-24:
++ Initial release
+

@@ -1,0 +1,78 @@
+--- I2c.c	2010-02-16 02:02:28.000000000 +0100
++++ i2c_mod.c	2010-11-26 03:50:01.000000000 +0100
+@@ -19,14 +19,18 @@
+     
+ */
+ 
++/* Modified by Axel Norstedt for PIC16F690 + M12BY02AA, original code in comments */
++
+ 
+ //=================
+ //Make sure the bits agree with the TRISB statements
+-#pragma bit scl_IIC @ RB5
+-#pragma bit sda_IIC @ RB4
++#define scl_IIC PORTB.6 /* #pragma bit scl_IIC @ RB5 */
++#define sda_IIC PORTB.4 /* #pragma bit sda_IIC @ RB4 */
+ 
+-#define  WRITE_sda() TRISB = TRISB & 0b.1110.1111 //SDA must be output when writing
+-#define  READ_sda() TRISB = TRISB | 0b.0001.0000 //SDA must be input when reading
++#define  MODE_WRITE_scl() TRISB.6 = 0 //SCL must be output when writing
++#define  MODE_READ_scl() TRISB.6 = 1 //SCL must be input when reading
++#define  MODE_WRITE_sda() TRISB.4 = 0 //SDA must be output when writing
++#define  MODE_READ_sda() TRISB.4 = 1 //SDA must be input when reading
+ 
+ //=================
+ 
+@@ -92,16 +96,20 @@
+ 
+ void start(void)
+ {
+-    WRITE_sda();
++    MODE_WRITE_sda();
++    sda_IIC = 1;
++    MODE_WRITE_scl();
++    scl_IIC = 1;
+     sda_IIC = 0;
++    scl_IIC = 0;
+ }
+ 
+ void stop(void)
+ {
++    MODE_WRITE_scl();
+     scl_IIC = 0;
+ 
+-    WRITE_sda();
+-
++    MODE_WRITE_sda();
+     sda_IIC = 0;
+     nop();
+     nop();
+@@ -120,7 +128,7 @@
+ 
+     scl_IIC = 0;
+ 
+-    READ_sda();
++    MODE_READ_sda();
+ 
+     for(j = 0 ; j < 8 ; j++)
+     {
+@@ -142,7 +150,7 @@
+ {
+     int i;
+ 
+-    WRITE_sda();
++    MODE_WRITE_sda();
+ 
+     for( i = 0 ; i < 8 ; i++ )
+     {
+@@ -155,6 +163,7 @@
+ 
+     //read ack.
+     scl_IIC = 0;
+-    READ_sda();
++    MODE_READ_sda();
++    while(sda_IIC != 0); // Really wait for ACK *new*
+     scl_IIC = 1;
+-}
+\ No newline at end of file
++}
