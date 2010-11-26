@@ -11,7 +11,7 @@ If you're a windows user, please scroll down.
 
 *nix users:
 Verify you have a wrapper for Cc5x in ~/bin/cc5x (a bash script containing "wine /path/to/cc5x.exe $@" should suffice)
-Execute ./generate_hex.sh and fillow instructions
+Execute ./generate_hex.sh and follow instructions
 
 Windows users:
 The first step is to retrieve the i2c library used by the display driver, it's available from SparkFun (remember to thank them) in their tutorial section.
