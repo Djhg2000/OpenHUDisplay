@@ -1,5 +1,5 @@
 
-# Ignore problematic library
+# Ignore library with potential legal issues
 i2c.c
 
 # Ignore compile log
