@@ -1,0 +1,7 @@
+
+# Ignore problematic library
+i2c.c
+
+# Ignore compile log
+project_pic16f690.occ
+

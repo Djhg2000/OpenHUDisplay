@@ -131,21 +131,20 @@ void main(void)
 			vfd_send_char(' ');
 			if (speed_index > 0)
 			{
-				if (hundreds == '0')
+				if (hundreds != '0')
+				{
+					vfd_send_char(hundreds);
+					vfd_send_char(tens);
+				}
+				else if (tens != '0')
 				{
 					vfd_send_char(' ');
-					if (tens == '0')
-					{
-						vfd_send_char(' ');
-					}
-					else
-					{
-						vfd_send_char(tens);
-					}
+					vfd_send_char(tens);
 				}
 				else
 				{
-					vfd_send_char(hundreds);
+					vfd_send_char(' ');
+					vfd_send_char(' ');
 				}
 				vfd_send_char(ones);
 			}
