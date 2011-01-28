@@ -79,7 +79,7 @@ Horizontally mirrored characters:
 
 #define VFD_I2C_ID 0b1010.0.0.0.0	/* Spec states the I2C ID is 0b1010.A2.A1.A0 where A2-0 is state of pin 5-7. The ID is followed by a zero, indicating I2C mode */
 
-#include "i2c.c"	/* Modified SparkFun i2c library */
+#include "i2c.c"			/* Modified SparkFun i2c library */
 
 void vfd_init(void);
 void vfd_brightness(char);
@@ -170,6 +170,7 @@ void vfd_set_address(char address)
 	vfd_current_address_offset = address;
 }
 
+#pragma codepage 1
 void vfd_send_char(char c)
 {
 	if (vfd_current_address_offset > 0x21)
@@ -180,6 +181,11 @@ void vfd_send_char(char c)
 	switch(c)
 	{
 		case ' ':	vfd_send_segments(vfd_current_address_offset, 0b00000000, 0b00000000, 0b00000000);	break;
+		case '\'':	vfd_send_segments(vfd_current_address_offset, 0b00000000, 0b00000001, 0b00000000);	break;
+		case '+':	vfd_send_segments(vfd_current_address_offset, 0b01000000, 0b11010101, 0b00000000);	break;
+		case ',':	vfd_send_segments(vfd_current_address_offset, 0b00000000, 0b00010000, 0b00000000);	break;
+		case '-':	vfd_send_segments(vfd_current_address_offset, 0b01000000, 0b10000100, 0b00000000);	break;
+		case '.':	vfd_send_segments(vfd_current_address_offset, 0b00000000, 0b10000000, 0b00000000);	break;
 		case '0':	vfd_send_segments(vfd_current_address_offset, 0b00111111, 0b00000000, 0b00000000);	break;
 		case '1':	vfd_send_segments(vfd_current_address_offset, 0b00110000, 0b00000000, 0b00000000);	break;
 		case '2':	vfd_send_segments(vfd_current_address_offset, 0b01101101, 0b10000100, 0b00000000);	break;
@@ -191,10 +197,65 @@ void vfd_send_char(char c)
 		case '8':	vfd_send_segments(vfd_current_address_offset, 0b01111111, 0b10000100, 0b00000000);	break;
 		case '9':	vfd_send_segments(vfd_current_address_offset, 0b01111011, 0b10000100, 0b00000000);	break;
 		case ':':	vfd_send_segments(vfd_current_address_offset, 0b00000000, 0b01000000, 0b00000000);	break;
+		case '=':	vfd_send_segments(vfd_current_address_offset, 0b01001000, 0b10000100, 0b00000000);	break;
+		case 'A':	vfd_send_segments(vfd_current_address_offset, 0b01110111, 0b10000100, 0b00000000);	break;
+		case 'B':	vfd_send_segments(vfd_current_address_offset, 0b01111001, 0b10001010, 0b00000000);	break;
+		case 'C':	vfd_send_segments(vfd_current_address_offset, 0b00001111, 0b00000000, 0b00000000);	break;
+		case 'D':	vfd_send_segments(vfd_current_address_offset, 0b00111001, 0b00001010, 0b00000000);	break;
+		case 'E':	vfd_send_segments(vfd_current_address_offset, 0b01001111, 0b10000100, 0b00000000);	break;
+		case 'F':	vfd_send_segments(vfd_current_address_offset, 0b01000111, 0b10000100, 0b00000000);	break;
+		case 'G':	vfd_send_segments(vfd_current_address_offset, 0b01011111, 0b00000000, 0b00000000);	break;
+		case 'H':	vfd_send_segments(vfd_current_address_offset, 0b01110110, 0b10000100, 0b00000000);	break;
+		case 'I':	vfd_send_segments(vfd_current_address_offset, 0b00000000, 0b11010001, 0b00000000);	break;
+		case 'J':	vfd_send_segments(vfd_current_address_offset, 0b00111100, 0b00000000, 0b00000000);	break;
+		case 'K':	vfd_send_segments(vfd_current_address_offset, 0b11010110, 0b10000100, 0b00000000);	break;
+		case 'L':	vfd_send_segments(vfd_current_address_offset, 0b00001110, 0b00000000, 0b00000000);	break;
+		case 'M':	vfd_send_segments(vfd_current_address_offset, 0b10110110, 0b10000010, 0b00000000);	break;
+		case 'N':	vfd_send_segments(vfd_current_address_offset, 0b00110110, 0b10100010, 0b00000000);	break;
+		case 'O':	vfd_send_segments(vfd_current_address_offset, 0b10001111, 0b00100000, 0b00000000);	break;
+		case 'P':	vfd_send_segments(vfd_current_address_offset, 0b01100111, 0b10000100, 0b00000000);	break;
+		case 'Q':	vfd_send_segments(vfd_current_address_offset, 0b10001111, 0b00110000, 0b00000000);	break;
+		case 'R':	vfd_send_segments(vfd_current_address_offset, 0b01100111, 0b10100100, 0b00000000);	break;
+		case 'S':	vfd_send_segments(vfd_current_address_offset, 0b00001011, 0b10100100, 0b00000000);	break;
+		case 'T':	vfd_send_segments(vfd_current_address_offset, 0b00000001, 0b11010001, 0b00000000);	break;
+		case 'U':	vfd_send_segments(vfd_current_address_offset, 0b00111110, 0b00000000, 0b00000000);	break;
+		case 'V':	vfd_send_segments(vfd_current_address_offset, 0b00101110, 0b00100000, 0b00000000);	break;
+		case 'W':	vfd_send_segments(vfd_current_address_offset, 0b00110110, 0b10101000, 0b00000000);	break;
+		case 'X':	vfd_send_segments(vfd_current_address_offset, 0b10000000, 0b10101010, 0b00000000);	break;
+		case 'Y':	vfd_send_segments(vfd_current_address_offset, 0b01100010, 0b11010100, 0b00000000);	break;
+		case 'Z':	vfd_send_segments(vfd_current_address_offset, 0b10001001, 0b10001000, 0b00000000);	break;
+		case '_':	vfd_send_segments(vfd_current_address_offset, 0b00001000, 0b00000000, 0b00000000);	break;
+		case 'a':	vfd_send_segments(vfd_current_address_offset, 0b01110111, 0b10000100, 0b00000000);	break;
+		case 'b':	vfd_send_segments(vfd_current_address_offset, 0b01111001, 0b10001010, 0b00000000);	break;
+		case 'c':	vfd_send_segments(vfd_current_address_offset, 0b00001111, 0b00000000, 0b00000000);	break;
+		case 'd':	vfd_send_segments(vfd_current_address_offset, 0b00111001, 0b00001010, 0b00000000);	break;
+		case 'e':	vfd_send_segments(vfd_current_address_offset, 0b01001111, 0b10000100, 0b00000000);	break;
+		case 'f':	vfd_send_segments(vfd_current_address_offset, 0b01000111, 0b10000100, 0b00000000);	break;
+		case 'g':	vfd_send_segments(vfd_current_address_offset, 0b01011111, 0b00000000, 0b00000000);	break;
+		case 'h':	vfd_send_segments(vfd_current_address_offset, 0b01110110, 0b10000100, 0b00000000);	break;
+		case 'i':	vfd_send_segments(vfd_current_address_offset, 0b00000000, 0b11010001, 0b00000000);	break;
+		case 'j':	vfd_send_segments(vfd_current_address_offset, 0b00111100, 0b00000000, 0b00000000);	break;
+		case 'k':	vfd_send_segments(vfd_current_address_offset, 0b11010110, 0b10000100, 0b00000000);	break;
+		case 'l':	vfd_send_segments(vfd_current_address_offset, 0b00001110, 0b00000000, 0b00000000);	break;
+		case 'm':	vfd_send_segments(vfd_current_address_offset, 0b10110110, 0b10000010, 0b00000000);	break;
+		case 'n':	vfd_send_segments(vfd_current_address_offset, 0b00110110, 0b10100010, 0b00000000);	break;
+		case 'o':	vfd_send_segments(vfd_current_address_offset, 0b10001111, 0b00100000, 0b00000000);	break;
+		case 'p':	vfd_send_segments(vfd_current_address_offset, 0b01100111, 0b10000100, 0b00000000);	break;
+		case 'q':	vfd_send_segments(vfd_current_address_offset, 0b10001111, 0b00110000, 0b00000000);	break;
+		case 'r':	vfd_send_segments(vfd_current_address_offset, 0b01100111, 0b10100100, 0b00000000);	break;
+		case 's':	vfd_send_segments(vfd_current_address_offset, 0b00001011, 0b10100100, 0b00000000);	break;
+		case 't':	vfd_send_segments(vfd_current_address_offset, 0b00000001, 0b11010001, 0b00000000);	break;
+		case 'u':	vfd_send_segments(vfd_current_address_offset, 0b00111110, 0b00000000, 0b00000000);	break;
+		case 'v':	vfd_send_segments(vfd_current_address_offset, 0b00101110, 0b00100000, 0b00000000);	break;
+		case 'w':	vfd_send_segments(vfd_current_address_offset, 0b00110110, 0b10101000, 0b00000000);	break;
+		case 'x':	vfd_send_segments(vfd_current_address_offset, 0b10000000, 0b10101010, 0b00000000);	break;
+		case 'y':	vfd_send_segments(vfd_current_address_offset, 0b01100010, 0b11010100, 0b00000000);	break;
+		case 'z':	vfd_send_segments(vfd_current_address_offset, 0b10001001, 0b10001000, 0b00000000);	break;
 		default:	vfd_send_segments(vfd_current_address_offset, 0b11111111, 0b11111111, 0b00000000);	break;
 	}
 	vfd_current_address_offset += 0x03;
 }
+#pragma codepage 0
 
 void vfd_send_segments(char address, char c, char d, char e)
 {
